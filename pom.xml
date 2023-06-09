@@ -6,7 +6,7 @@
     <version>v1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Extra Energy</name>
+    <name>Custom Starter Deck</name>
     <description>Mod for Slay the Spire that allows you to pick a custom starter deck.</description>
 
     <dependencies>

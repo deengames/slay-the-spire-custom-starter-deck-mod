@@ -2,7 +2,7 @@
 
 ![](media/screenshot.png)
 
-Allows you to craft a custom starter deck when the game begins, just like Stacked Deck in custom runs.
+Allows you to craft a custom starter deck when the game begins, just like Sealed Deck in custom runs.
 
 # Installation Instructions
 
