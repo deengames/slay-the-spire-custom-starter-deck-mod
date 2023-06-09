@@ -28,6 +28,8 @@ public class CustomStarterDeckMod implements ISubscriber, PostCreateStartingReli
 //PostCreateStartingRelicsSubscriber
 //StartActSubscriber
 {
+	boolean HACKITY_HACK = false;
+
 	public static void initialize() {
         new CustomStarterDeckMod();
     }
@@ -46,23 +48,27 @@ public class CustomStarterDeckMod implements ISubscriber, PostCreateStartingReli
 
 	// Pilfered from NeowEvent.dailyBlessing
 	private void doIt() {
-		CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-		
-		for (int i = 0; i < 30; i++) {
-			AbstractCard card = AbstractDungeon.getCard(AbstractDungeon.rollRarity());
-			if (!sealedGroup.contains(card)) {
-				sealedGroup.addToBottom(card.makeCopy());
-			} else {
-				i--;
-			} 
-		} 
-		
-		for (AbstractCard c : sealedGroup.group)
+		if (!HACKITY_HACK)
 		{
-			UnlockTracker.markCardAsSeen(c.cardID); 
-		}
+			HACKITY_HACK = true;
+			CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+			
+			for (int i = 0; i < 30; i++) {
+				AbstractCard card = AbstractDungeon.getCard(AbstractDungeon.rollRarity());
+				if (!sealedGroup.contains(card)) {
+					sealedGroup.addToBottom(card.makeCopy());
+				} else {
+					i--;
+				} 
+			} 
+			
+			for (AbstractCard c : sealedGroup.group)
+			{
+				UnlockTracker.markCardAsSeen(c.cardID); 
+			}
 
-		AbstractDungeon.gridSelectScreen.open(sealedGroup, 10, CardCrawlGame.languagePack.getCharacterString("Neow Event").OPTIONS[4], false);
+			AbstractDungeon.gridSelectScreen.open(sealedGroup, 1, CardCrawlGame.languagePack.getCharacterString("Neow Event").OPTIONS[4], false);
+		}
 	}
 
 	@Override
