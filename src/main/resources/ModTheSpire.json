@@ -1,8 +1,8 @@
 {
-  "modid": "Diverse",
-  "name": "Diverse",
+  "modid": "CustomStarterDeck",
+  "name": "CustomStarterDeck",
   "author_list": ["NightBlade9"],
-  "description": "Adds the Diverse modifier to your runs",
+  "description": "Allows you to craft a custom starter deck when the game begins",
   "version": "1.0.0",
   "sts_version": "07-05-2019",
   "mts_version": "2.6.0",

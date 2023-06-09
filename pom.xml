@@ -2,12 +2,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.deengames</groupId>
-    <artifactId>slaythespire.diverse</artifactId>
+    <artifactId>slaythespire.customstarterdeck</artifactId>
     <version>v1.0.0</version>
     <packaging>jar</packaging>
 
     <name>Extra Energy</name>
-    <description>Slay the Spire mod that adds the Diverse modifier to your runs.</description>
+    <description>Mod for Slay the Spire that allows you to pick a custom starter deck.</description>
 
     <dependencies>
         <dependency>
@@ -34,7 +34,7 @@
     </dependencies>
 
     <build>
-        <finalName>DiverseMod</finalName>
+        <finalName>CustomStarterDeckMod</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

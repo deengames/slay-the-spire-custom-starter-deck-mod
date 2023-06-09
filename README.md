@@ -1,8 +1,8 @@
-# Slay The Spire: Diverse
+# Slay The Spire: Custom Starter Deck
 
 ![](media/screenshot.png)
 
-Starts the game with the Diverse custom modifier, which allows you to get cards of any colour.
+Allows you to craft a custom starter deck when the game begins, just like Stacked Deck in custom runs.
 
 # Installation Instructions
 

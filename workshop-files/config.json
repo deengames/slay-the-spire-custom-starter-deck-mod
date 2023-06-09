@@ -1,13 +1,17 @@
 {
   "steamPublishedID": "2986743516",
-  "title": "Diverse",
-  "description": "Slay the Spire mod that adds the Diverse modifier to your runs.",
+  "title": "Custom Starter Deck",
+  "description": "Allows you to craft a custom starter deck when the game begins.",
   "visibility": "public",
   "changeNote": "",
   "tags": [
     "Deen Games",
     "deengames",
-    "diverse",
+    "customstarterdeck",
+    "custom",
+    "starter",
+    "deck",
+    "starter deck",
     "modifier",
     "custom modifier"
   ]
