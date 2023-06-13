@@ -35,12 +35,23 @@ public class CustomStarterDeckPatches {
     @SpirePatch(clz=NeowEvent.class, method="playSfx")
     public static class ShowDeckAfterNeowRoom {
         public static void Postfix(NeowEvent __instance) {
-            System.out.println("*****************");
+            System.out.println("***************** meow");
+            //CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+            // generatePoolOfCards(sealedGroup);
+            //promptPlayerToPickCards(sealedGroup, "Pick " + CARDS_IN_DECK + " cards for your starting deck.");
+        }
+    }
+
+    @SpirePatch(clz=NeowEvent.class, method="talk")
+    public static class ShowDeckAfterTalk {
+        public static void Postfix(NeowEvent __instance) {
+            System.out.println("***************** talkity talk");
             CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
             // generatePoolOfCards(sealedGroup);
             promptPlayerToPickCards(sealedGroup, "Pick " + CARDS_IN_DECK + " cards for your starting deck.");
         }
     }
+
 
     private static void generatePoolOfCards(CardGroup sealedGroup)
 	{
