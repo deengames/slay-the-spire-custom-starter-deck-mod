@@ -27,20 +27,18 @@ public class CustomStarterDeckPatches {
     //         return SpireReturn.Continue();
     //     }
 
-	private static final Random random = new Random();
+	// private static final Random random = new Random();
 
 	private final static int CARDS_IN_DECK = 10;
 	private final static int CARDS_TO_PICK_FROM = 30;
 
-    @SpirePatch(clz=NeowEvent.class, method="shouldSkipNeowDialog")
+    @SpirePatch(clz=NeowEvent.class, method="playSfx")
     public static class ShowDeckAfterNeowRoom {
-        public static SpireReturn<Boolean> Postfix(NeowEvent __instance) {
+        public static void Postfix(NeowEvent __instance) {
             System.out.println("*****************");
             CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-            generatePoolOfCards(sealedGroup);
+            // generatePoolOfCards(sealedGroup);
             promptPlayerToPickCards(sealedGroup, "Pick " + CARDS_IN_DECK + " cards for your starting deck.");
-
-            return SpireReturn.Return(!Settings.isStandardRun());
         }
     }
 
@@ -48,7 +46,7 @@ public class CustomStarterDeckPatches {
 	{
 		// Pick 30ish random cards for the player to pick from
         for (int i = 0; i < CARDS_TO_PICK_FROM; i++) {
-            AbstractCard card = AbstractDungeon.getCard(getCardRarityFallback());//AbstractDungeon.rollRarity());
+            AbstractCard card = AbstractDungeon.getCard(AbstractDungeon.rollRarity());
             if (!sealedGroup.contains(card)) {
                 sealedGroup.addToBottom(card.makeCopy());
             } else {
@@ -67,14 +65,14 @@ public class CustomStarterDeckPatches {
 		AbstractDungeon.gridSelectScreen.open(sealedGroup, CARDS_IN_DECK, label, false);
 	}
 
-    private static AbstractCard.CardRarity getCardRarityFallback()
-	{
-		int roll = random.random(99);
-		int rareRate = 3;
-		if (roll < rareRate)
-			return AbstractCard.CardRarity.RARE;
-		if (roll < 40)
-			return AbstractCard.CardRarity.UNCOMMON;
-		return AbstractCard.CardRarity.COMMON;
-	}
+    // private static AbstractCard.CardRarity getCardRarityFallback()
+	// {
+	// 	int roll = random.random(99);
+	// 	int rareRate = 3;
+	// 	if (roll < rareRate)
+	// 		return AbstractCard.CardRarity.RARE;
+	// 	if (roll < 40)
+	// 		return AbstractCard.CardRarity.UNCOMMON;
+	// 	return AbstractCard.CardRarity.COMMON;
+	// }
 }
