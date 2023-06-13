@@ -18,6 +18,8 @@ public class ShowSealedDeck {
 	// Pilfered from NeowEvent.dailyBlessing
 	private static void onPlayerEntry(NeowRoom __instance) 
 	{
+		System.out.println("***************************** on player enttyr");
+
 		String[] options = CardCrawlGame.languagePack.getCharacterString("Neow Event").OPTIONS;
 		CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
 

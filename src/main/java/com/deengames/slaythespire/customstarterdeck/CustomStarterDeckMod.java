@@ -22,17 +22,14 @@ import java.util.List;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 
 @SpireInitializer
-public class CustomStarterDeckMod implements ISubscriber, PostCreateStartingRelicsSubscriber, StartGameSubscriber
+public class CustomStarterDeckMod implements ISubscriber, PostCreateStartingRelicsSubscriber//, StartGameSubscriber
 {
-
-
-
 	// private static final Random random = new Random();
 
 	public static void initialize() {
         new CustomStarterDeckMod();
     }
-	
+
 	public CustomStarterDeckMod() {
 		BaseMod.subscribe(this);
 	}
@@ -40,25 +37,30 @@ public class CustomStarterDeckMod implements ISubscriber, PostCreateStartingReli
 	@Override
 	public void receivePostCreateStartingRelics(PlayerClass arg0, ArrayList<String> arg1) {
 		// Set custom mode, we need it later
+		// System.out.println("wheeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 		List<String> list = new ArrayList<String>();
 		list.add(SealedDeck.ID);
 		list.add(Insanity.ID);
 		ModHelper.setMods(list);
 	}
 
-	@Override
-	public void receiveStartGame() {
-		// doIt();
-	}
+	// @Override
+	// public void receiveStartGame() {
+	// 	// doIt();
+	// }
+
+	////////////////////////////////////////////////
+
+
 
 	// private static AbstractCard.CardRarity getCardRarityFallback()
 	// {
 	// 	int roll = random.random(99);
 	// 	int rareRate = 3;
 	// 	if (roll < rareRate)
-	// 		return AbstractCard.CardRarity.RARE; 
+	// 		return AbstractCard.CardRarity.RARE;
 	// 	if (roll < 40)
-	// 		return AbstractCard.CardRarity.UNCOMMON; 
+	// 		return AbstractCard.CardRarity.UNCOMMON;
 	// 	return AbstractCard.CardRarity.COMMON;
 	// }
 }
