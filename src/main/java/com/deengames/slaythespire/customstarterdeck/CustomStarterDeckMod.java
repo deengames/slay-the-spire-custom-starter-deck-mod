@@ -25,8 +25,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 public class CustomStarterDeckMod implements ISubscriber, PostCreateStartingRelicsSubscriber, StartGameSubscriber
 {
 
-	private final int CARDS_TO_PICK_FROM = 30;
-	private final int CARDS_IN_DECK = 10;
+
 
 	// private static final Random random = new Random();
 
@@ -47,48 +46,9 @@ public class CustomStarterDeckMod implements ISubscriber, PostCreateStartingReli
 		ModHelper.setMods(list);
 	}
 
-	// Pilfered from NeowEvent.dailyBlessing
-	private void doIt() 
-	{
-		String[] options = CardCrawlGame.languagePack.getCharacterString("Neow Event").OPTIONS;
-		CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-
-		generatePoolOfCards(sealedGroup);
-
-		// NeowEvent event = (NeowEvent) AbstractDungeon.getCurrRoom().event;
-		// event.roomEventText.clearRemainingOptions();
-		// event.roomEventText.updateDialogOption(0, options[3]);
-
-		promptPlayerToPickCards(sealedGroup, options[4]);
-	}
-
-	private void generatePoolOfCards(CardGroup sealedGroup)
-	{
-		// Pick 30ish random cards for the player to pick from
-		
-		for (int i = 0; i < CARDS_TO_PICK_FROM; i++) {
-			AbstractCard card = AbstractDungeon.getCard(AbstractDungeon.rollRarity());
-			if (!sealedGroup.contains(card)) {
-				sealedGroup.addToBottom(card.makeCopy());
-			} else {
-				i--;
-			} 
-		} 
-		
-		for (AbstractCard c : sealedGroup.group)
-		{
-			UnlockTracker.markCardAsSeen(c.cardID); 
-		}
-	}
-
-	private void promptPlayerToPickCards(CardGroup sealedGroup, String label)
-	{
-		AbstractDungeon.gridSelectScreen.open(sealedGroup, CARDS_IN_DECK, label, false);
-	}
-
 	@Override
 	public void receiveStartGame() {
-		doIt();
+		// doIt();
 	}
 
 	// private static AbstractCard.CardRarity getCardRarityFallback()
