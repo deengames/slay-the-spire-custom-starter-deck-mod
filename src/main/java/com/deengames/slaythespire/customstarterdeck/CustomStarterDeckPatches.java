@@ -1,10 +1,13 @@
 package com.deengames.slaythespire.customstarterdeck;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.daily.mods.SealedDeck;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.neow.NeowEvent;
@@ -14,41 +17,53 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 public class CustomStarterDeckPatches {
 
-    // @SpirePatch(clz=ModHelper.class, method="isModEnabled")
-    //     public static class StackedDeckIsAlwaysEnabled {
-    //     public static SpireReturn<Boolean> Prefix(ModHelper __instance, String modID) {
-    //         //System.out.println("**** checking: " + modID);
+    private static boolean isDone = false;
 
-    //         // if (modID.equals(SealedDeck.ID)) {
-    //         //     System.out.println("***************************** spire return true");
-    //         //     return SpireReturn.Return(true);
-    //         // }
+    // @SpirePatch(clz=ModHelper.class, method="isModEnabled")
+    // public static class StackedDeckIsAlwaysEnabled {
+    //     @SpirePrefixPatch
+    //     public static SpireReturn<Boolean> Prefix(ModHelper instance, String modID) {
+    //         System.out.println("**** checking: " + modID);
+
+    //         if (modID.equals(SealedDeck.ID)) {
+    //             System.out.println("***************************** spire return true");
+    //             return SpireReturn.Return(true);
+    //         }
 
     //         return SpireReturn.Continue();
     //     }
+    // }
 
 	// private static final Random random = new Random();
 
 	private final static int CARDS_IN_DECK = 10;
 	private final static int CARDS_TO_PICK_FROM = 30;
 
-    @SpirePatch(clz=NeowEvent.class, method="playSfx")
-    public static class ShowDeckAfterNeowRoom {
-        public static void Postfix(NeowEvent __instance) {
-            System.out.println("***************** meow");
-            //CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-            // generatePoolOfCards(sealedGroup);
-            //promptPlayerToPickCards(sealedGroup, "Pick " + CARDS_IN_DECK + " cards for your starting deck.");
-        }
-    }
+    // @SpirePatch(clz=NeowEvent.class, method="playSfx")
+    // public static class ShowDeckAfterNeowRoom {
+    //     public static void Postfix(NeowEvent __instance) {
+    //         if (!isDone) {
+    //             isDone = true;
+    //             System.out.println("***************** meow");
+    //             CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+    //             generatePoolOfCards(sealedGroup);
+    //             promptPlayerToPickCards(sealedGroup, "Pick " + CARDS_IN_DECK + " cards for your starting deck.");
+    //         }
+    //     }
+    // }
 
     @SpirePatch(clz=NeowEvent.class, method="talk")
     public static class ShowDeckAfterTalk {
-        public static void Postfix(NeowEvent __instance) {
-            System.out.println("***************** talkity talk");
-            CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-            // generatePoolOfCards(sealedGroup);
-            promptPlayerToPickCards(sealedGroup, "Pick " + CARDS_IN_DECK + " cards for your starting deck.");
+        @SpirePostfixPatch
+        public static void Postfix(NeowEvent instance) {
+            if (!isDone) {
+                isDone = true;
+                System.out.println("***************** talkity talk");
+                NeowEvent.rng = new Random(Settings.seed);
+                CardGroup sealedGroup = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
+                generatePoolOfCards(sealedGroup);
+                promptPlayerToPickCards(sealedGroup, "Pick " + CARDS_IN_DECK + " cards for your starting deck.");
+            }
         }
     }
 
